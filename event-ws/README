@@ -1,0 +1,12 @@
+NOTES for various things that we are doing:
+
+Freebies that we are using:
+- node.js
+- node mysql
+- frisby
+- express
+
+To run the server:
+- cd event-ws
+- npm install
+- npm start
