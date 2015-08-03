@@ -14,5 +14,8 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "mysql": "^2.5.4"
+  },
+  "devDependencies": {
+    "frisby": "^0.8.5"
   }
 }
