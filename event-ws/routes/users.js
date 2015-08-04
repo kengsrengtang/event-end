@@ -23,10 +23,10 @@ var get_user_err = function(res, err) {
 };
 
 router.get('/', function(req, res, next) {
-  if (req.query.phone) {
-    console.log("phone query param " + req.query.phone);
+  if (req.query.phone_number) {
+    console.log("phone query param " + req.query.phone_number);
   	// get the users using phone number
-  	users_comp.get_users_by_phone(req.query.phone, res, get_user_success, get_user_err);
+  	users_comp.get_users_by_phone(req.query.phone_number, res, get_user_success, get_user_err);
   } else if (req.query.id) {
   	// get the users using his id
     console.log("id query param " + req.query.id);
@@ -69,8 +69,8 @@ var delete_user_err = function(res, err) {
 };
 
 router.delete('/', function(req, res, next) {
-  console.log("deleting user id " + req.params.id);
-  users_comp.delete_user(req.params.id, res, delete_user_success, delete_user_err);
+  console.log("deleting user whose phone number is " + req.query.phone_number);
+  users_comp.delete_user(req.query.phone_number, res, delete_user_success, delete_user_err);
 });
 
 module.exports = router;

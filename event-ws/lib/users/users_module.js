@@ -34,6 +34,19 @@ exports.get_users_by_phone = function (phoneNumber, response, success_cb, error_
 			// assuming only 1 match
 			success_cb(response, result[0]);
 		}
-	})
-} 
-	
+	});
+}
+
+exports.delete_user = function (phoneNumber, response, success_cb, error_cb) {
+  console.log("deleting user whose phone number is " + phoneNumber);
+  if(phoneNumber) {
+    connection.query("DELETE FROM EventUsers WHERE phone_number = " + phoneNumber, function (err, result) {
+      if (err) {
+        error_cb(response, err)
+      } else {
+        // assuming only 1 match
+        success_cb(response, result[0]);
+      }
+    });
+  }
+}
