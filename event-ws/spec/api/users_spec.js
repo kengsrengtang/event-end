@@ -1,5 +1,13 @@
 var frisby = require('frisby');
 
+frisby.create('Delete a user')
+  .delete('http://localhost:8080/users/1')
+.toss();
+
+frisby.create('Delete a user')
+  .delete('http://localhost:8080/users?phone_number=4083682708')
+.toss();
+
 frisby.create('Create a new user')
   .post('http://localhost:8080/users', {
     phone_number: 4083682708,
@@ -8,23 +16,9 @@ frisby.create('Create a new user')
   })
   .expectStatus(200)
   .expectHeaderContains('content-type', 'application/json')
-  .expectJSON('0', {
-    place: function(val) { expect(val).toMatchOrBeNull("Oklahoma City, OK"); }, // Custom matcher callback
-    user: {
-      verified: false,
-      location: "Oklahoma City, OK",
-      url: "http://brightb.it"
-    }
-  })
-  .expectJSONTypes('0', {
-    id_str: String,
-    retweeted: Boolean,
-    in_reply_to_screen_name: function(val) { expect(val).toBeTypeOrNull(String); }, // Custom matcher callback
-    user: {
-      verified: Boolean,
-      location: String,
-      url: String
-    }
+  .expectJSON({
+    status: 0,
+    user_id: 1
   })
 .toss();
 
@@ -32,23 +26,13 @@ frisby.create('Get Event User by Phone number')
   .get('http://localhost:8080/users?phone=4083682708')
   .expectStatus(200)
   .expectHeaderContains('content-type', 'application/json')
-  .expectJSON('0', {
-    place: function(val) { expect(val).toMatchOrBeNull("Oklahoma City, OK"); }, // Custom matcher callback
-    user: {
-      verified: false,
-      location: "Oklahoma City, OK",
-      url: "http://brightb.it"
-    }
-  })
-  .expectJSONTypes('0', {
-    id_str: String,
-    retweeted: Boolean,
-    in_reply_to_screen_name: function(val) { expect(val).toBeTypeOrNull(String); }, // Custom matcher callback
-    user: {
-      verified: Boolean,
-      location: String,
-      url: String
-    }
+  .expectJSON({
+    id: 1,
+    phone_number: 4083682708,
+    first_name: '',
+    last_name: '',
+    registration_status: 0,
+    email: null
   })
 .toss();
 
@@ -56,22 +40,12 @@ frisby.create('Get Event User by id')
   .get('http://localhost:8080/users?id=1')
   .expectStatus(200)
   .expectHeaderContains('content-type', 'application/json')
-  .expectJSON('0', {
-    place: function(val) { expect(val).toMatchOrBeNull("Oklahoma City, OK"); }, // Custom matcher callback
-    user: {
-      verified: false,
-      location: "Oklahoma City, OK",
-      url: "http://brightb.it"
-    }
-  })
-  .expectJSONTypes('0', {
-    id_str: String,
-    retweeted: Boolean,
-    in_reply_to_screen_name: function(val) { expect(val).toBeTypeOrNull(String); }, // Custom matcher callback
-    user: {
-      verified: Boolean,
-      location: String,
-      url: String
-    }
+  .expectJSON({
+    id: 1,
+    phone_number: 4083682708,
+    first_name: '',
+    last_name: '',
+    registration_status: 0,
+    email: null
   })
 .toss();
