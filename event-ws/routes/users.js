@@ -22,16 +22,21 @@ var get_user_err = function(res, err) {
   res.send({'status': 1, 'message': err.message});
 };
 
+router.get('/:id', function(req, res, next) {
+  	// get the users using the id
+    console.log("id query param " + req.params.id);
+    users_comp.get_users_by_id(req.params.id, res, get_user_success, get_user_err);
+});
+
 router.get('/', function(req, res, next) {
   if (req.query.phone_number) {
     console.log("phone query param " + req.query.phone_number);
   	// get the users using phone number
   	users_comp.get_users_by_phone(req.query.phone_number, res, get_user_success, get_user_err);
-  } else if (req.query.id) {
-  	// get the users using his id
-    console.log("id query param " + req.query.id);
   } else {
-    res.send([]);
+  	console.error("Must specify phone_number in query");
+    prep_response(res, 500);
+    res.send({'status': 1, 'message': "Must specify phone_number in query"});
   }
 });
 

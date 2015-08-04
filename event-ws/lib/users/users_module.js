@@ -27,10 +27,26 @@ exports.get_users_by_phone = function (phoneNumber, response, success_cb, error_
 		if (err) {
 			error_cb(response, err)
 		} else {
-			// assuming only 1 match
-			success_cb(response, result[0]);
+      if (result.length > 0)
+			 success_cb(response, result[0]);
+      else 
+        error_cb(response, {message: "No user having phone number " + phoneNumber});
 		}
 	});
+}
+
+exports.get_users_by_id = function (dbId, response, success_cb, error_cb) {
+  console.log("getting user whose db id is " + dbId);
+  connection.query("SELECT * FROM EventUsers WHERE id = " + dbId, function(err, result) {
+    if (err) {
+      error_cb(response, err)
+    } else {
+      if (result.length > 0)
+       success_cb(response, result[0]);
+      else 
+        error_cb(response, {message: "No user having user id " + dbId});
+    }
+  });
 }
 
 exports.delete_user = function (phoneNumber, response, success_cb, error_cb) {

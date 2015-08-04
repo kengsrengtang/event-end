@@ -10,3 +10,11 @@ To run the server:
 - cd event-ws
 - npm install
 - npm start
+
+
+To run on ubuntu:
+- export NODE_ENV=production
+- npm start
+
+To use mysql on Ubuntu:
+- mysql --user=root -password=mkh123
