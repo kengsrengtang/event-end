@@ -1,12 +1,8 @@
 var mysql      = require('mysql');
 var constants  = require('../constants');
+var config = require('config');
 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'eventws'
-});
+var connection = mysql.createConnection(config.get('dbConfig'));
 
 connection.connect();
 
