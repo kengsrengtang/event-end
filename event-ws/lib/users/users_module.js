@@ -1,10 +1,6 @@
-var mysql      = require('mysql');
 var constants  = require('../constants');
-var config = require('config');
 
-var connection = mysql.createConnection(config.get('dbConfig'));
-
-connection.connect();
+var dbConn = require('../db_layer');
 
 exports.create_user = function(newUser, response, success_cb, error_cb) {
   if (!newUser.phone_number) {
@@ -12,7 +8,7 @@ exports.create_user = function(newUser, response, success_cb, error_cb) {
   }
   newUser.registration_status = constants.PENDING_VERIFICATION;
   console.log("Trying to create a new user with phone number " + newUser.phone_number);
-  connection.query("INSERT INTO EventUsers SET ?", newUser, function(err, result) {
+  dbConn.get_conn().query("INSERT INTO EventUsers SET ?", newUser, function(err, result) {
 	if (err) {
   	  error_cb(response, err)
 	} else {
@@ -23,7 +19,7 @@ exports.create_user = function(newUser, response, success_cb, error_cb) {
 
 exports.get_users_by_phone = function (phoneNumber, response, success_cb, error_cb) {
 	console.log("getting user whose phone number is " + phoneNumber);
-	connection.query("SELECT * FROM EventUsers WHERE phone_number = " + phoneNumber, function(err, result) {
+	dbConn.get_conn().query("SELECT * FROM EventUsers WHERE phone_number = " + phoneNumber, function(err, result) {
 		if (err) {
 			error_cb(response, err)
 		} else {
@@ -37,7 +33,7 @@ exports.get_users_by_phone = function (phoneNumber, response, success_cb, error_
 
 exports.get_users_by_id = function (dbId, response, success_cb, error_cb) {
   console.log("getting user whose db id is " + dbId);
-  connection.query("SELECT * FROM EventUsers WHERE id = " + dbId, function(err, result) {
+  dbConn.get_conn().query("SELECT * FROM EventUsers WHERE id = " + dbId, function(err, result) {
     if (err) {
       error_cb(response, err)
     } else {
@@ -52,7 +48,7 @@ exports.get_users_by_id = function (dbId, response, success_cb, error_cb) {
 exports.delete_user = function (phoneNumber, response, success_cb, error_cb) {
   console.log("deleting user whose phone number is " + phoneNumber);
   if(phoneNumber) {
-    connection.query("DELETE FROM EventUsers WHERE phone_number = " + phoneNumber, function (err, result) {
+    dbConn.get_conn().query("DELETE FROM EventUsers WHERE phone_number = " + phoneNumber, function (err, result) {
       if (err) {
         error_cb(response, err)
       } else {
