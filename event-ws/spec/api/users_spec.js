@@ -29,7 +29,7 @@ frisby.create('Get Event User by Phone number')
     phone_number: 4083682708,
     first_name: 'Huey',
     last_name: 'Tuteja',
-    registration_status: 0,
+    reg_status: 2,
     email: null
   })
 .toss();
