@@ -3,6 +3,7 @@
     "host"     : "localhost",
     "user"     : "root",
     "password" : "",
-    "database" : "eventws"
+    "database" : "eventws",
+    "connectionLimit": 10
   }
 }

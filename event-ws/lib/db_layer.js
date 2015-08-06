@@ -2,12 +2,10 @@ var mysql  = require('mysql');
 var config = require('config');
 var moment = require('moment');
 
-var connection = mysql.createConnection(config.get('dbConfig'));
-
-connection.connect();
+var pool = mysql.createPool(config.get('dbConfig'));
 
 exports.get_conn = function() {
-	return connection;
+	return pool;
 }
 
 exports.get_now_ts = function() {
