@@ -11,7 +11,7 @@ var prep_response = function(res, statusCode) {
 
 /* GET users listing. */
 var get_user_success = function(res, userObject) {
-  console.log("get user success id is " + userObject.id);
+  console.log("get user success is " + userObject);
   prep_response(res, 200);
   res.send(userObject);
 };

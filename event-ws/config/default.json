@@ -1,8 +1,9 @@
 {
   "dbConfig":{
     "host"     : "localhost",
-    "user"     : "root",
-    "password" : "",
+    "port"     : 5432,
+    "user"     : "eventapp",
+    "password" : "eventapp",
     "database" : "eventws",
     "connectionLimit": 10
   }

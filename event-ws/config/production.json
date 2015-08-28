@@ -1,6 +1,7 @@
 {
   "dbConfig":{
     "host"     : "localhost",
+    "port"     : 5432,
     "user"     : "root",
     "password" : "mkh123",
     "database" : "eventws",
