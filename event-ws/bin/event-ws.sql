@@ -19,6 +19,7 @@ CREATE TABLE `Events` (
   `theme` VARCHAR(255),
   `place` VARCHAR(255),
   `time` DATETIME NOT NULL,
+  `duration` INT DEFAULT -1,
   `notes` TEXT,
   `created_time` DATETIME NOT NULL,
   `last_updated_time` DATETIME NOT NULL,
